@@ -5,9 +5,7 @@
 #include <Poco/Util/Application.h>
 #include <Poco/Util/LayeredConfiguration.h>
 
-#include <iostream>
-#include <memory>
-#include <sstream>
+#include "circle_que.h"
 
 class MyApp : public Poco::Util::Application {
    private:
@@ -25,7 +23,13 @@ class MyApp : public Poco::Util::Application {
             Poco::Stopwatch stop_watch;
             stop_watch.start();
 
-            logger.trace("hello algorithm");
+            CircleQue circleQue(3);
+
+            logger.trace("size:%d", circleQue.size());
+            circleQue.push(2);
+            logger.trace("size:%d", circleQue.size());
+            logger.trace("pop:%d", circleQue.pop());
+            logger.trace("size:%d", circleQue.size());
 
             stop_watch.stop();
             logger.trace("%ld", stop_watch.elapsed());

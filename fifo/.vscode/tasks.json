@@ -23,7 +23,11 @@
                         "message": 5
                     }
                 }
-            ]
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         },
         {
             "label": "clean",
@@ -34,7 +38,8 @@
             ],
             "problemMatcher": [
                 "$gcc"
-            ]
+            ],
+            "group": "build"
         }
     ]
 }

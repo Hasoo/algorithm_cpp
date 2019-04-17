@@ -5,6 +5,7 @@
             "includePath": [
                 "${workspaceFolder}",
                 "${workspaceFolder}/../../packages/boost/include",
+                "${workspaceFolder}/../../packages/googletest/include",
                 "${workspaceFolder}/../../packages/poco/include"
             ],
             "compilerPath": "/usr/bin/g++",
@@ -14,6 +15,7 @@
                 "path": [
                     "${workspaceFolder}",
                     "${workspaceFolder}/../../packages/boost/include",
+                    "${workspaceFolder}/../../packages/googletest/include",
                     "${workspaceFolder}/../../packages/poco/include"
                 ],
                 "limitSymbolsToIncludedHeaders": true,

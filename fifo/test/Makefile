@@ -11,8 +11,8 @@
 CXX := g++
 CXXFLAGS += -c -g -Wall -std=c++17
 LDFLAGS +=
-LIBFLAGS := -L$(POCO_PATH)/lib -lPocoUtil -lPocoFoundation -L$(RABBITMQ_PATH)/lib -lrabbitmq
-INCLUDEFLAGS := -I$(BOOST_PATH)/include -I$(POCO_PATH)/include -I$(RABBITMQ_PATH)/include -I../rabbitmq-cpp/include
+LIBFLAGS := -L$(GOOGLETEST_PATH)/lib -lgtest -pthread
+INCLUDEFLAGS := -I$(GOOGLETEST_PATH)/include
 
 TARGET := test
 
@@ -22,7 +22,7 @@ OBJDIR := .
 BINDIR := .
 
 HEADERS := $(wildcard $(HEADERDIR)/*.h)
-SRCS := $(wildcard $(SRCDIR)/*.cc) $(wildcard ../rabbitmq-cpp/src/*.cc)
+SRCS := $(wildcard $(SRCDIR)/*.cc)
 OBJS := $(subst $(SRCDIR)/,$(OBJDIR)/,$(SRCS:.cc=.o))
 
 CXXFLAGS += $(INCLUDEFLAGS) -I$(HEADERDIR)
@@ -41,6 +41,5 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cc
 clean:
 	rm -f $(OBJDIR)/*.o $(BINDIR)/$(TARGET)
 	rm -f core
-	cd gtest && make clean
 
 distclean: clean
