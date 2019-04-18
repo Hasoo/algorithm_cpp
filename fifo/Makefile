@@ -12,12 +12,12 @@ CXX := g++
 LDFLAGS +=
 ifeq ($(OS),Windows_NT)
 CXXFLAGS += -c -g -Wall -std=c++17 -DPOCO_WIN32_UTF8
-LIBFLAGS := -L$(POCO_PATH)/lib -lPocoUtil -lPocoFoundation
-INCLUDEFLAGS := -I$(BOOST_PATH)/include -I$(POCO_PATH)/include
-else
-CXXFLAGS += -c -g -Wall -std=c++17
 LIBFLAGS := -lPocoFoundation -lPocoUtil
 INCLUDEFLAGS :=
+else
+CXXFLAGS += -c -g -Wall -std=c++17
+LIBFLAGS := -L$(POCO_PATH)/lib -lPocoUtil -lPocoFoundation
+INCLUDEFLAGS := -I$(BOOST_PATH)/include -I$(POCO_PATH)/include
 endif
 
 TARGET := test
