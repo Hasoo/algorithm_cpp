@@ -11,8 +11,13 @@
 CXX := g++
 CXXFLAGS += -c -g -Wall -std=c++17
 LDFLAGS +=
+ifeq ($(OS),Windows_NT)
+LIBFLAGS := -L../../../packages/googletest/lib -lgtest -pthread
+INCLUDEFLAGS := -I../../../packages/googletest/include
+else
 LIBFLAGS := -L$(GOOGLETEST_PATH)/lib -lgtest -pthread
 INCLUDEFLAGS := -I$(GOOGLETEST_PATH)/include
+endif
 
 TARGET := test
 

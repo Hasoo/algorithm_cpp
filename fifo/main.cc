@@ -32,7 +32,7 @@ class MyApp : public Poco::Util::Application {
             logger.trace("size:%d", circleQue.size());
 
             stop_watch.stop();
-            logger.trace("%ld", stop_watch.elapsed());
+            logger.trace("%ld", (long)stop_watch.elapsed());
         } catch (Poco::Exception &ex) {
             logger.error(ex.what());
         }

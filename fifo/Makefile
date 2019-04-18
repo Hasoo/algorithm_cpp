@@ -9,10 +9,16 @@
 # ------------------------------------------------
 
 CXX := g++
-CXXFLAGS += -c -g -Wall -std=c++17
 LDFLAGS +=
-LIBFLAGS := -L$(POCO_PATH)/lib -lPocoUtil -lPocoFoundation -L$(RABBITMQ_PATH)/lib -lrabbitmq
-INCLUDEFLAGS := -I$(BOOST_PATH)/include -I$(POCO_PATH)/include -I$(RABBITMQ_PATH)/include -I../rabbitmq-cpp/include
+ifeq ($(OS),Windows_NT)
+CXXFLAGS += -c -g -Wall -std=c++17 -DPOCO_WIN32_UTF8
+LIBFLAGS := -L$(POCO_PATH)/lib -lPocoUtil -lPocoFoundation
+INCLUDEFLAGS := -I$(BOOST_PATH)/include -I$(POCO_PATH)/include
+else
+CXXFLAGS += -c -g -Wall -std=c++17
+LIBFLAGS := -lPocoFoundation -lPocoUtil
+INCLUDEFLAGS :=
+endif
 
 TARGET := test
 
@@ -22,7 +28,7 @@ OBJDIR := .
 BINDIR := .
 
 HEADERS := $(wildcard $(HEADERDIR)/*.h)
-SRCS := $(wildcard $(SRCDIR)/*.cc) $(wildcard ../rabbitmq-cpp/src/*.cc)
+SRCS := $(wildcard $(SRCDIR)/*.cc)
 OBJS := $(subst $(SRCDIR)/,$(OBJDIR)/,$(SRCS:.cc=.o))
 
 CXXFLAGS += $(INCLUDEFLAGS) -I$(HEADERDIR)
