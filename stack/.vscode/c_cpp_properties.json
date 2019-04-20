@@ -1,0 +1,48 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}",
+                "${workspaceFolder}/../../packages/boost/include",
+                "${workspaceFolder}/../../packages/googletest/include",
+                "${workspaceFolder}/../../packages/poco/include"
+            ],
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}",
+                    "${workspaceFolder}/../../packages/boost/include",
+                    "${workspaceFolder}/../../packages/googletest/include",
+                    "${workspaceFolder}/../../packages/poco/include"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            }
+        },
+        {
+            "name": "Windows",
+            "includePath": [
+                "${workspaceFolder}",
+                "${workspaceFolder}/../../packages/googletest/include",
+                "C:/msys64/mingw64/include"
+            ],
+            "compilerPath": "C:/msys64/mingw64/bin/gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "clang-x64",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}",
+                    "${workspaceFolder}/../../packages/googletest/include",
+                    "C:/msys64/mingw64/include"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            }
+        }
+    ],
+    "version": 4
+}
