@@ -11,11 +11,11 @@
 CXX := g++
 LDFLAGS +=
 ifeq ($(OS),Windows_NT)
-CXXFLAGS += -c -g -Wall -std=c++17 -DPOCO_WIN32_UTF8
+CXXFLAGS += -g -Wall -std=c++17 -MD -DPOCO_WIN32_UTF8
 LIBFLAGS := -lPocoFoundation -lPocoUtil
 INCLUDEFLAGS :=
 else
-CXXFLAGS += -c -g -Wall -std=c++17
+CXXFLAGS += -g -Wall -std=c++17 -MD
 LIBFLAGS := -L$(POCO_PATH)/lib -lPocoUtil -lPocoFoundation
 INCLUDEFLAGS := -I$(BOOST_PATH)/include -I$(POCO_PATH)/include
 endif
@@ -30,23 +30,32 @@ BINDIR := .
 HEADERS := $(wildcard $(HEADERDIR)/*.h)
 SRCS := $(wildcard $(SRCDIR)/*.cc)
 OBJS := $(subst $(SRCDIR)/,$(OBJDIR)/,$(SRCS:.cc=.o))
+DEPS = $(OBJS:.o=.d)
 
 CXXFLAGS += $(INCLUDEFLAGS) -I$(HEADERDIR)
 LDFLAGS += $(LIBFLAGS)
 
-.PHONY: all clean distclean
+.PHONY: all clean distclean gtest gtest-clean
 
-all: $(BINDIR)/$(TARGET)
+all: $(BINDIR)/$(TARGET) gtest
 
 $(BINDIR)/$(TARGET): $(OBJS)
-	$(CXX) $(OBJS) -o $@ $(LDFLAGS)
+	$(CXX) -o $@ $^ $(LDFLAGS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cc
-	$(CXX) $(CXXFLAGS) $< -o $@
+	$(CXX) -c -o $@ $(CXXFLAGS) $<
 
-clean:
-	rm -f $(OBJDIR)/*.o $(BINDIR)/$(TARGET)
-	rm -f core
-	cd gtest && make clean
+gtest:
+	make -C ./gtest
+
+gtest-clean:
+	make -C ./gtest clean
+
+clean: gtest-clean
+	rm -f $(OBJS)
+	rm -f $(TARGET)
+	rm -f $(DEPS)
 
 distclean: clean
+
+-include $(DEPS)

@@ -9,14 +9,14 @@
 # ------------------------------------------------
 
 CXX := g++
-CXXFLAGS += -c -g -Wall -std=c++17
+CXXFLAGS += -g -Wall -std=c++17 -MD
 LDFLAGS +=
 ifeq ($(OS),Windows_NT)
-LIBFLAGS := -L../../../packages/googletest/lib -lgtest -pthread
-INCLUDEFLAGS := -I../../../packages/googletest/include
+LIBFLAGS := -L$(GTEST_PATH)/lib -lgtest -pthread
+INCLUDEFLAGS := -I$(GTEST_PATH)/include
 else
-LIBFLAGS := -L$(GOOGLETEST_PATH)/lib -lgtest -pthread
-INCLUDEFLAGS := -I$(GOOGLETEST_PATH)/include
+LIBFLAGS := -L$(GTEST_PATH)/lib -lgtest -pthread
+INCLUDEFLAGS := -I$(GTEST_PATH)/include
 endif
 
 TARGET := test
@@ -29,22 +29,29 @@ BINDIR := .
 HEADERS := $(wildcard $(HEADERDIR)/*.h)
 SRCS := $(wildcard $(SRCDIR)/*.cc)
 OBJS := $(subst $(SRCDIR)/,$(OBJDIR)/,$(SRCS:.cc=.o))
+DEPS = $(OBJS:.o=.d)
 
 CXXFLAGS += $(INCLUDEFLAGS) -I$(HEADERDIR)
 LDFLAGS += $(LIBFLAGS)
 
 .PHONY: all clean distclean
 
-all: $(BINDIR)/$(TARGET)
+all: $(BINDIR)/$(TARGET) test-exec
 
 $(BINDIR)/$(TARGET): $(OBJS)
-	$(CXX) $(OBJS) -o $@ $(LDFLAGS)
+	$(CXX) -o $@ $^ $(LDFLAGS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cc
-	$(CXX) $(CXXFLAGS) $< -o $@
+	$(CXX) -c -o $@ $(CXXFLAGS) $<
+
+test-exec:
+	./test
 
 clean:
-	rm -f $(OBJDIR)/*.o $(BINDIR)/$(TARGET)
-	rm -f core
+	rm -f $(OBJS)
+	rm -f $(TARGET)
+	rm -f $(DEPS)
 
 distclean: clean
+
+-include $(DEPS)
