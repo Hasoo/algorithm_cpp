@@ -55,6 +55,7 @@ clean: gtest-clean
 	rm -f $(OBJS)
 	rm -f $(TARGET)
 	rm -f $(DEPS)
+	rm -f *.log
 
 distclean: clean
 

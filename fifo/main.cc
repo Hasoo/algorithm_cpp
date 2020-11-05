@@ -8,7 +8,7 @@
 #include "circle_que.h"
 
 class MyApp : public Poco::Util::Application {
-private:
+ private:
   void initialize(Poco::Util::Application &self) {
     loadConfiguration();
 

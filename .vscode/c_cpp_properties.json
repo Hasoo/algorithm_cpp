@@ -3,20 +3,21 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}",
-                "${workspaceFolder}/../../packages/boost/include",
-                "${workspaceFolder}/../../packages/googletest/include",
-                "${workspaceFolder}/../../packages/poco/include"
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/../packages/boost-1.74.0/include",
+                "${workspaceFolder}/../packages/googletest-1.10.0/include",
+                "${workspaceFolder}/../packages/poco-1.10.1/include"
             ],
             "compilerPath": "/usr/bin/g++",
             "cStandard": "c11",
             "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-x64",
             "browse": {
                 "path": [
-                    "${workspaceFolder}",
-                    "${workspaceFolder}/../../packages/boost/include",
-                    "${workspaceFolder}/../../packages/googletest/include",
-                    "${workspaceFolder}/../../packages/poco/include"
+                    "${workspaceFolder}/**",
+                    "${workspaceFolder}/../packages/boost-1.74.0/include",
+                    "${workspaceFolder}/../packages/googletest-1.10.0/include",
+                    "${workspaceFolder}/../packages/poco-1.10.1/include"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
@@ -26,7 +27,7 @@
             "name": "Windows",
             "includePath": [
                 "${workspaceFolder}",
-                "${workspaceFolder}/../../packages/googletest/include",
+                "${workspaceFolder}/../packages/googletest/include",
                 "C:/msys64/mingw64/include"
             ],
             "compilerPath": "C:/msys64/mingw64/bin/gcc",
@@ -36,7 +37,7 @@
             "browse": {
                 "path": [
                     "${workspaceFolder}",
-                    "${workspaceFolder}/../../packages/googletest/include",
+                    "${workspaceFolder}/../packages/googletest/include",
                     "C:/msys64/mingw64/include"
                 ],
                 "limitSymbolsToIncludedHeaders": true,

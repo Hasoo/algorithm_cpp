@@ -1,7 +1,7 @@
 {
   "editor.formatOnSave": true,
   "editor.formatOnType": true,
-  "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 80}",
+  "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, UseTab: Never, IndentWidth: 2, ColumnLimit: 80}",
   "files.associations": {
     "array": "cpp",
     "atomic": "cpp",
